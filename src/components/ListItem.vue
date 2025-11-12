@@ -30,6 +30,9 @@ const add = () => {
   <input placeholder="New good name" v-model="newName" />
   <button @click="add">Add new one</button>
   <button @click="emit('resetStatus')">Reset status</button>
+
+  <h3>Total: {{ rowList.length }}</h3>
+  <h3>Rest of goods: {{ rowList.length - rowList.filter((g) => g.done).length }}</h3>
   <div class="list">
     <template v-for="item of list" :key="item.name">
       <span>{{ item.name }}</span>
