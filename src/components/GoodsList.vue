@@ -1,6 +1,6 @@
 <template>
   <div>I am a good's list</div>
-  <ListItem :list="list" @turn="turn" @add="add" />
+  <ListItem :list="list" @turn="turn" @add="add" @reset-status="resetStatus" />
 </template>
 
 <script setup lang="ts">
@@ -11,6 +11,12 @@ const list = reactive([
   { name: 'Bread', done: false },
   { name: 'Milk', done: true },
 ])
+
+function resetStatus() {
+  list.forEach((g) => {
+    g.done = false
+  })
+}
 
 function add(name: string, done: (e: boolean) => void) {
   const good = list.find((g) => g.name === name)

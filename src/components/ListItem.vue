@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, computed } from 'vue'
 
 const newName = ref('')
-const { list } = defineProps<{ list: { name: string; done: boolean }[] }>()
+const showAll = ref(true)
+const { list: rowList } = defineProps<{ list: { name: string; done: boolean }[] }>()
 const emit = defineEmits<{
   (e: 'turn', name: string): void
   (e: 'add', name: string, done: (r: boolean) => void): void
+  (e: 'resetStatus'): void
 }>()
+
+const list = computed(() => (showAll.value ? rowList : rowList.filter((g) => !g.done)))
+
+const turnShowed = () => {
+  showAll.value = !showAll.value
+}
 
 const add = () => {
   emit('add', newName.value, (res: boolean) => {
@@ -18,6 +26,10 @@ const add = () => {
 </script>
 
 <template>
+  <button @click="turnShowed">{{ showAll ? 'Filter out which is done' : 'Show all goods' }}</button>
+  <input placeholder="New good name" v-model="newName" />
+  <button @click="add">Add new one</button>
+  <button @click="emit('resetStatus')">Reset status</button>
   <div class="list">
     <template v-for="item of list" :key="item.name">
       <span>{{ item.name }}</span>
@@ -26,8 +38,6 @@ const add = () => {
       >
     </template>
   </div>
-  <input placeholder="New good name" v-model="newName" />
-  <button @click="add">Add new one</button>
 </template>
 
 <style scope>
