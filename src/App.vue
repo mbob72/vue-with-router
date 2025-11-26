@@ -21,7 +21,6 @@ const store = useCounterStore()
         <RouterLink to="/login">Login</RouterLink>
       </nav>
     </div>
-    <button @click="store.increment()">Increment counter {{ store.count }}</button>
   </header>
 
   <RouterView />
