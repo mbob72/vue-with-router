@@ -5,13 +5,8 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
-import { onMounted } from 'vue'
 
 const openReadmeInEditor = () => fetch('/__open-in-editor?file=README.md')
-onMounted(() => {
-  alert('I am mounted!')
-  console.log('here we are')
-})
 </script>
 
 <template>
