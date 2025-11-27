@@ -16,7 +16,7 @@ router.beforeEach((to, from) => {
   const auth = useAuthStore()
 
   if (!auth.user?.name && to.meta.requireAuth) {
-    return false
+    return '/login'
   }
 
   // if (store.count && !to.meta.requireAuth) {
